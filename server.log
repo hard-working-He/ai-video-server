@@ -1,0 +1,18 @@
+2025/04/29 21:39:08 Database connection successful!
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/v1/videos/videolists --> go-mysql-videos/handlers.(*VideoHandler).GetAllVideoLists-fm (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2025/04/29 - 21:40:07 | 404 |         4.5µs |             ::1 | GET      "/"
+[GIN] 2025/04/29 - 21:40:07 | 404 |         417ns |             ::1 | GET      "/favicon.ico"
+[GIN] 2025/04/29 - 21:40:08 | 404 |         834ns |             ::1 | GET      "/"
+[GIN] 2025/04/29 - 21:41:54 | 404 |       1.042µs |             ::1 | GET      "/"
+[GIN] 2025/04/29 - 21:41:55 | 404 |         958ns |             ::1 | GET      "/"
+[GIN] 2025/04/29 - 21:41:56 | 404 |       1.167µs |             ::1 | GET      "/"
+signal: terminated
