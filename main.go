@@ -6,6 +6,8 @@ import (
 	"go-mysql-videos/db"
 	"go-mysql-videos/models"
 	"go-mysql-videos/routes"
+
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
@@ -21,6 +23,9 @@ func main() {
 
 	// Setup the router
 	r := routes.SetupRouter()
+
+	// 使用默认CORS配置
+	r.Use(cors.Default())
 
 	// Start the server
 	if err := r.Run(":8080"); err != nil {
