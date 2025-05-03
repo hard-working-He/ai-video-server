@@ -38,6 +38,8 @@ func SetupRouter() *gin.Engine {
 		{
 			// POST接口：获取所有视频列表
 			videos.POST("/videolists", videoHandler.GetAllVideoLists)
+			// POST接口：保存一个新视频
+			videos.POST("/newvideo", videoHandler.PostNewVideo)
 		}
 	}
 

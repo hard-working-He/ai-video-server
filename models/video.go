@@ -6,23 +6,23 @@ import (
 	"gorm.io/gorm"
 )
 
-// JSONB is a custom type for JSON data stored in the database
-type JSONB string
-
-// VideoList defines the model structure for the video_lists table
+// VideoList 定义了 video_lists 表的模型结构
 type VideoList struct {
-	ID             uint      `json:"id" gorm:"primaryKey"`
-	FilePath       string    `json:"file_path" gorm:"type:varchar(255);not null"`
-	CreationParams JSONB     `json:"creation_params" gorm:"type:json"`
-	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime"`
+	ID             uint      `json:"id" gorm:"primaryKey"`                        // 主键 ID，在 JSON 中显示为 "id"，在数据库中作为主键
+	FilePath       string    `json:"file_path" gorm:"type:varchar(255);not null"` // 文件路径，不能为空，在数据库中设置为 varchar(255) 类型
+	CreationParams string    `json:"creation_params" gorm:"type:varchar(255)"`    // 创建参数，从JSON类型改为普通字符串类型
+	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime"`            // 创建时间，使用 GORM 自动填充当前时间
+	Status         string    `json:"status" gorm:"type:varchar(255);not null"`
 }
 
-// TableName specifies the table name for the VideoList model
+// TableName 指定 VideoList 模型对应的数据库表名
+// 这个方法会被 GORM 调用以确定表名
 func (VideoList) TableName() string {
-	return "video_lists"
+	return "video_lists" // 返回表名为 "video_lists"
 }
 
-// Migrate performs database migrations for the VideoList model
+// Migrate 为 VideoList 模型执行数据库迁移
+// 此函数接收一个 GORM 数据库连接，并使用它创建或更新数据库表结构
 func Migrate(db *gorm.DB) error {
-	return db.AutoMigrate(&VideoList{})
+	return db.AutoMigrate(&VideoList{}) // 自动迁移 VideoList 模型到数据库，返回可能出现的错误
 }

@@ -45,3 +45,35 @@ func (h *VideoHandler) GetAllVideoLists(c *gin.Context) {
 		"total":   len(videoLists),
 	})
 }
+
+// post一个新视频
+func (h *VideoHandler) PostNewVideo(c *gin.Context) {
+	// 获取数据库连接
+	dbConn := db.GetDB()
+
+	// 获取请求中的视频数据
+	var video models.VideoList
+	if err := c.ShouldBindJSON(&video); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success": false,
+			"message": "请求参数错误",
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	// 将视频数据保存到数据库
+	result := dbConn.Create(&video)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"success": false,
+			"message": "保存视频失败",
+		})
+	}
+
+	// 保存成功，返回200状态码
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "视频保存成功",
+	})
+}
